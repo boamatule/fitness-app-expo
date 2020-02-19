@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "fitness app",
+    "slug": "fitexpo",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    // "icon": "./assets/icon.png",
+    "onboard": {
+      "image": "./assets/onboard.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "extra": {
+      "firebase": {
+        "apiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "authDomain": "rock-elevator-xxxxxx.firebaseapp.com",
+        "databaseURL": "https://rock-elevator-xxxxxx.firebaseio.com",
+        "projectId": "rock-elevator-xxxxxxx",
+        "storageBucket": "rock-elevator-xxxxxxx.appspot.com",
+        "messagingSenderId": "xxxxxxx",
+        "appId": "1:109151963963:web:xxxxxxx",
+        "measurementId": "G-xxxxxxx"
+      }
+    }
+  }
+}
