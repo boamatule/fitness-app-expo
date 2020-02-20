@@ -12,7 +12,7 @@ import {Text, Icon, Input, Button, SocialIcon} from 'react-native-elements';
 import firebase from "../components/Firebase";
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {LoginManager, AccessToken} from 'react-native-fbsdk';
+// import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import * as Facebook from "expo-facebook";
 import * as GoogleSignIn from 'expo-google-sign-in';
 import Constants from "expo-constants";
@@ -55,8 +55,31 @@ export default class LoginScreen extends Component {
         .auth()
         .signInWithCredential(credential);
       console.log(facebookProfileData);
+      setTimeout(() => {
+        navigation.navigate('HomeScreen');
+      }, 2000);
     }
   }
+
+
+  signInWithGoogle = async () => {
+    const appId = Constants.manifest.extra.google.appId;
+    const permissions = ["public_profile", "email"];
+    await GoogleSignin.signIn(appI);
+    const { type, token } = Google.logInWithReadPermissionsAsync({
+      permissions
+    });
+ 
+    if (type == "success") {
+      await firebase.auth().setPersistence(firebase.auth. Auth.Persistence.LOCAL);
+      const credential = firebase.auth.GoogleAuthProvider.credential(token);
+      const googleProfileData = await firebase
+        .auth()
+        .signInWithCredential(credential);
+      console.log(googleProfileData);
+    }
+  }
+  
 
   // async FacebookLogin() {
   //   const result = await LoginManager.logInWithPermissions([
@@ -83,41 +106,23 @@ export default class LoginScreen extends Component {
   //   }, 2000);
   // }
 
-  async googleLogin() {
-    try {
-      // add any configuration settings here:
-      await GoogleSignin.configure();
-      const data = await GoogleSignin.signIn();
-      // create a new firebase credential with the token
-      const credential = firebase.auth.GoogleAuthProvider.credential(
-        data.idToken,
-        data.accessToken,
-      );
-      // login with credential
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
-      console.log(firebaseUserCredential.user.toJSON());
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  // googleLogin = async () => {
-  //   const appId = Constants.manifest.extra.facebook.appId;
-  //   const permissions = ["public_profile", "email"];
-  //   await GoogleSignin.signIn(appI);
-  //   const { type, token } = Facebook.logInWithReadPermissionsAsync({
-  //     permissions
-  //   });
- 
-  //   if (type == "success") {
-  //     await firebase.auth().setPersistence(firebase.auth. Auth.Persistence.LOCAL);
-  //     const credential = firebase.auth.FacebookAuthProvider.credential(token);
-  //     const googleProfileData = await firebase
+  // async signInWithGoogle() {
+  //   try {
+  //     // add any configuration settings here:
+  //     await GoogleSignIn.configure();
+  //     const data = await GoogleSignIn.signIn(); 
+  //     // create a new firebase credential with the token
+  //     const credential = firebase.auth.GoogleAuthProvider.credential(
+  //       data.idToken,
+  //       data.accessToken,
+  //     );
+  //     // login with credential
+  //     const firebaseUserCredential = await firebase
   //       .auth()
   //       .signInWithCredential(credential);
-  //     console.log(googleProfileData);
+  //     console.log(firebaseUserCredential.user.toJSON());
+  //   } catch (e) {
+  //     console.error(e);
   //   }
   // }
 
@@ -209,13 +214,15 @@ export default class LoginScreen extends Component {
                         <SocialIcon type="facebook" light />
                       </TouchableOpacity>
 
-                      <TouchableOpacity onPress={() => this.googleLogin()}>
+                      <TouchableOpacity onPress={() => this.signInWithGoogle()}>
                         <SocialIcon type="google" light />
                       </TouchableOpacity>
 
-                      {/* <SocialIcon type="google" light /> */}
-                      <SocialIcon type="twitter" light />
+                      <TouchableOpacity onPress={() => this.signInWithTwitter()}>
+                        <SocialIcon type="twitter" light />
+                      </TouchableOpacity>
                     </View>
+
                     <Button
                       title="Login"
                       loading={false}

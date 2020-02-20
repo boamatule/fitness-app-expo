@@ -28,19 +28,19 @@
     },
     "extra": {
       "firebase": {
-        "apiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "authDomain": "rock-elevator-xxxxxx.firebaseapp.com",
-        "databaseURL": "https://rock-elevator-xxxxxx.firebaseio.com",
-        "projectId": "rock-elevator-xxxxxxx",
-        "storageBucket": "rock-elevator-xxxxxxx.appspot.com",
-        "messagingSenderId": "xxxxxxx",
-        "appId": "1:109151963963:web:xxxxxxx",
-        "measurementId": "G-xxxxxxx"
+        "apiKey": "AIzaSyBjXAgOozsrs0r7Y1mAfNjl158XaCuZHdE",
+        "authDomain": "fitnessapp-86a7c.firebaseapp.com",
+        "databaseURL": "https://fitnessapp-86a7c.firebaseio.com",
+        "projectId": "fitnessapp-86a7c",
+        "storageBucket": "fitnessapp-86a7c.appspot.com",
+        "messagingSenderId": "302501304715",
+        "appId": "1:302501304715:web:2b051025773952b7ca378e",
+        "measurementId": "G-W1PP0SXJCW"
       },
       "facebook": {
         "appId": "1067262210317549"
       },
-      "google": {
+      "googleSignIn": {
         "appId": "1067262210317549"
       }
     }
