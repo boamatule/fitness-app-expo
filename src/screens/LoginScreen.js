@@ -14,6 +14,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import * as Facebook from "expo-facebook";
+import * as GoogleSignIn from 'expo-google-sign-in';
 import Constants from "expo-constants";
 // import { GoogleSignin } from '@react-native-community/google-signin';
 
@@ -102,6 +103,24 @@ export default class LoginScreen extends Component {
     }
   }
 
+  // googleLogin = async () => {
+  //   const appId = Constants.manifest.extra.facebook.appId;
+  //   const permissions = ["public_profile", "email"];
+  //   await GoogleSignin.signIn(appI);
+  //   const { type, token } = Facebook.logInWithReadPermissionsAsync({
+  //     permissions
+  //   });
+ 
+  //   if (type == "success") {
+  //     await firebase.auth().setPersistence(firebase.auth. Auth.Persistence.LOCAL);
+  //     const credential = firebase.auth.FacebookAuthProvider.credential(token);
+  //     const googleProfileData = await firebase
+  //       .auth()
+  //       .signInWithCredential(credential);
+  //     console.log(googleProfileData);
+  //   }
+  // }
+
   render() {
     const LoginSchema = Yup.object().shape({
       email: Yup.string()
@@ -186,7 +205,7 @@ export default class LoginScreen extends Component {
                   <View style={styles.socialWrapper}>
                     <Text style={styles.signinwith}>Sign in with</Text>
                     <View style={styles.socialLogin}>
-                      <TouchableOpacity onPress={() => this.FacebookLogin()}>
+                      <TouchableOpacity onPress={() => this.signInWithFacebook()}>
                         <SocialIcon type="facebook" light />
                       </TouchableOpacity>
 

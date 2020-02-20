@@ -38,7 +38,10 @@
         "measurementId": "G-xxxxxxx"
       },
       "facebook": {
-        "appId": "xxxxxxxx"
+        "appId": "1067262210317549"
+      },
+      "google": {
+        "appId": "1067262210317549"
       }
     }
   }
