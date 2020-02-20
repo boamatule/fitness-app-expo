@@ -9,12 +9,13 @@ import {
   ScrollView,
 } from 'react-native';
 import {Text, Icon, Input, Button, SocialIcon} from 'react-native-elements';
-// import firebase from 'react-native-firebase';
 import firebase from "../components/Firebase";
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {LoginManager, AccessToken} from 'react-native-fbsdk';
-import { GoogleSignin } from '@react-native-community/google-signin';
+import * as Facebook from "expo-facebook";
+import Constants from "expo-constants";
+// import { GoogleSignin } from '@react-native-community/google-signin';
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
@@ -38,30 +39,48 @@ export default class LoginScreen extends Component {
       });
   };
 
-  async FacebookLogin() {
-    const result = await LoginManager.logInWithPermissions([
-      'public_profile',
-      'email',
-    ]);
-
-    if (result.isCancelled) {
-      throw new Error('User cancelled the Login process');
+  signInWithFacebook = async () => {
+    const appId = Constants.manifest.extra.facebook.appId;
+    const permissions = ["public_profile", "email"];
+    await Facebook.initializeAsync(appId);
+    const { type, token } = Facebook.logInWithReadPermissionsAsync({
+      permissions
+    });
+ 
+    if (type == "success") {
+      await firebase.auth().setPersistence(firebase.auth. Auth.Persistence.LOCAL);
+      const credential = firebase.auth.FacebookAuthProvider.credential(token);
+      const facebookProfileData = await firebase
+        .auth()
+        .signInWithCredential(credential);
+      console.log(facebookProfileData);
     }
-    const data = await AccessToken.getCurrentAccessToken();
-
-    if (!data) {
-      throw new Error('Something went wrong obtaining  access token');
-    }
-    const credential = firebase.auth.FacebookAuthProvider.credential(
-      data.accessToken,
-    );
-
-    await firebase.auth().signInWithCredential(credential);
-    alert('Registration success');
-    setTimeout(() => {
-      navigation.navigate('HomeScreen');
-    }, 2000);
   }
+
+  // async FacebookLogin() {
+  //   const result = await LoginManager.logInWithPermissions([
+  //     'public_profile',
+  //     'email',
+  //   ]);
+
+  //   if (result.isCancelled) {
+  //     throw new Error('User cancelled the Login process');
+  //   }
+  //   const data = await AccessToken.getCurrentAccessToken();
+
+  //   if (!data) {
+  //     throw new Error('Something went wrong obtaining  access token');
+  //   }
+  //   const credential = firebase.auth.FacebookAuthProvider.credential(
+  //     data.accessToken,
+  //   );
+
+  //   await firebase.auth().signInWithCredential(credential);
+  //   alert('Registration success');
+  //   setTimeout(() => {
+  //     navigation.navigate('HomeScreen');
+  //   }, 2000);
+  // }
 
   async googleLogin() {
     try {

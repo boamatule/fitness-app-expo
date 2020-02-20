@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Text, Icon, Input, Button, SocialIcon} from 'react-native-elements';
 // import firebase from 'react-native-firebase';
-import firebase from "../components/Firebase";
+// import firebase from "../components/Firebase";
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
